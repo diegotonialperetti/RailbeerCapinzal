@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cervejaria Railbeer - Artesanal de Capinzal/SC</title>
+    <meta name="description" content="Cervejaria Railbeer. Produzida em Capinzal, Santa Catarina. Peça já a sua cerveja artesanal em garrafas de 600ml.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            DEFAULT: '#b87333',
+                            light: '#d48a45',
+                            dark: '#8a501c',
+                        },
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#141414',
+                            700: '#222222',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Segoe UI', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0a0a0a; color: #f3f4f6; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #b87333; }
+        
+        .hero-bg {
+            background-image: linear-gradient(to bottom, rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 1)), url('https://images.unsplash.com/photo-1575037614876-c385b0d06940?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .glass-card {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(184, 115, 51, 0.15);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(184, 115, 51, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(184,115,51,0.2);
+        }
+
+        .title-font { font-family: 'Playfair Display', serif; }
+
+        .btn-beer {
+            background: linear-gradient(135deg, #d48a45 0%, #b87333 100%);
+            color: #000;
+            font-weight: 800;
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+        .btn-beer::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: rgba(255,255,255,0.2);
+            transform: skewX(-20deg);
+            transition: 0.5s;
+        }
+        .btn-beer:hover::after { left: 150%; }
+        
+        .age-gate {
+            border: 2px solid #555;
+            color: #aaa;
+            border-radius: 50%;
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 14px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+</head>
+<body class="antialiased selection:bg-amber selection:text-white">
+
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i class="fa-solid fa-train-tram text-amber text-3xl"></i>
+                    <span class="font-bold text-2xl tracking-widest text-white uppercase">Rail<span class="text-amber">beer</span></span>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#estilos" class="text-gray-300 hover:text-amber transition-colors text-sm font-bold tracking-widest uppercase">Nossas Cervejas</a>
+                    <a href="#sobre" class="text-gray-300 hover:text-amber transition-colors text-sm font-bold tracking-widest uppercase">Nossa História</a>
+                    <a href="#delivery" class="text-gray-300 hover:text-amber transition-colors text-sm font-bold tracking-widest uppercase">Entregas</a>
+                    <a href="https://wa.me/5549999999999" target="_blank" class="btn-beer px-5 py-2 rounded shadow-lg flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> WHATSAPP
+                    </a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-amber hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-900 border-b border-dark-700 absolute w-full top-full left-0">
+            <div class="px-4 pt-2 pb-4 space-y-2 flex flex-col text-center">
+                <a href="#estilos" class="text-gray-300 hover:text-amber block py-3 text-lg border-b border-dark-800">Cervejas</a>
+                <a href="#sobre" class="text-gray-300 hover:text-amber block py-3 text-lg border-b border-dark-800">Nossa História</a>
+                <a href="#delivery" class="text-gray-300 hover:text-amber block py-3 text-lg border-b border-dark-800">Como Comprar</a>
+                <a href="https://wa.me/5549999999999" target="_blank" class="btn-beer block py-3 rounded text-lg mt-2">
+                    <i class="fa-brands fa-whatsapp"></i> Chamar no Zap
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-bg min-h-screen flex items-center justify-center pt-20 text-center relative">
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <div class="inline-block mb-4">
+                <span class="bg-dark-900/80 border border-amber/30 text-amber text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full backdrop-blur-sm">
+                    Cervejaria Artesanal • Capinzal/SC
+                </span>
+            </div>
+            <h1 class="title-font text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white drop-shadow-lg">
+                Próxima Parada:<br>
+                <span class="text-amber italic">Cerveja de Verdade.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto drop-shadow-md">
+                Produzida com paixão, precisão tecnológica e os melhores maltes. Descubra os sabores da Railbeer e embarque nesta viagem artesanal.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#estilos" class="btn-beer px-8 py-4 rounded text-lg flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-beer-mug-empty"></i> Ver a Carta
+                </a>
+                <a href="#delivery" class="bg-transparent border-2 border-white hover:border-amber hover:text-amber text-white font-bold px-8 py-4 rounded text-lg transition-colors flex items-center justify-center gap-3 backdrop-blur-sm">
+                    <i class="fa-solid fa-bottle-water"></i> Pedir Garrafas
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-gray-500">
+            <i class="fa-solid fa-chevron-down text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- OS ESTILOS (CARDÁPIO DE 24 CERVEJAS) -->
+    <section id="estilos" class="py-24 bg-dark-900 relative">
+        <div class="absolute top-0 right-0 opacity-5 pointer-events-none">
+            <i class="fa-solid fa-wheat-awn text-[300px] text-amber"></i>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-amber tracking-widest uppercase font-bold text-sm mb-2"><i class="fa-solid fa-star text-xs"></i> Garrafas de 600ml <i class="fa-solid fa-star text-xs"></i></h2>
+                <h3 class="title-font text-4xl md:text-5xl font-bold text-white">Os Nossos Estilos</h3>
+                <div class="w-24 h-1 bg-amber mx-auto mt-6 rounded"></div>
+            </div>
+
+            <!-- Grid de Cervejas (24 Estilos) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- 1. Pilsen -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1518176258769-f227c798150e?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Pilsen'" alt="Pilsen" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                        <div class="absolute top-4 right-4 bg-amber text-black text-xs font-bold px-2 py-1 rounded shadow-lg uppercase">Best Seller</div>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Primeira Classe</h4>
+                            <span class="text-amber font-mono font-bold text-sm">PILSEN</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">A nossa clássica. Dourada, cristalina, com colarinho persistente. Alta drinkability e final refrescante.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 4.5%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 12</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Pilsen%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 2. IPA -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1555658636-6e4a36210be7?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=IPA'" alt="IPA" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Locomotiva</h4>
+                            <span class="text-amber font-mono font-bold text-sm">IPA</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Uma explosão cítrica nos carris. Amargor marcante com aromas intensos de maracujá e pinho.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 6.5%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 55</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20IPA%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 3. Weiss -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Weiss'" alt="Weiss" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Vagão 42</h4>
+                            <span class="text-amber font-mono font-bold text-sm">WEISS</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Cerveja de trigo turva e cremosa. Notas clássicas de cravo e banana para uma viagem suave.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 5.0%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 15</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Weiss%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 4. Stout -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1505075936515-2fa3739828d0?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Stout'" alt="Stout" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Carvão</h4>
+                            <span class="text-amber font-mono font-bold text-sm">STOUT</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Escura como a noite. Traz no palato o malte torrado, remetendo a café expresso e cacau.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 5.8%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 30</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Stout%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 5. APA -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1615332220133-f70e1719b0cb?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=APA'" alt="APA" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Carris do Sul</h4>
+                            <span class="text-amber font-mono font-bold text-sm">APA</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Aroma cítrico e herbal, amargor perfeitamente equilibrado. Ideal para ver a paisagem passar.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 5.2%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 35</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20APA%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 6. Double IPA -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1566805188849-5776d653775b?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Double+IPA'" alt="Double IPA" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Expresso</h4>
+                            <span class="text-amber font-mono font-bold text-sm">DOUBLE IPA</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Carga dupla de lúpulo. Forte, amarga, veloz e implacável para os paladares mais exigentes.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 8.2%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 80</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Double%20IPA%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 7. Session IPA -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1657223246830-4e2a1de1ba41?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Session+IPA'" alt="Session IPA" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Bilhete Simples</h4>
+                            <span class="text-amber font-mono font-bold text-sm">SESSION IPA</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Leve, refrescante e muito aromática. A escolha perfeita para viagens curtas sob o sol.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 4.0%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 25</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Session%20IPA%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 8. Amber Ale -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1614316045769-637f5d63f03e?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Amber+Ale'" alt="Amber Ale" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Cobre</h4>
+                            <span class="text-amber font-mono font-bold text-sm">AMBER ALE</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Notas doces de caramelo e tosta suave, exibindo uma linda cor de cobre polido no copo.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 5.5%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 28</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Amber%20Ale%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 9. Red Ale -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Red+Ale'" alt="Red Ale" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Sinal Vermelho</h4>
+                            <span class="text-amber font-mono font-bold text-sm">RED ALE</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Maltada, com cor rubi encantadora e um final ligeiramente seco. Irresistível.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 5.0%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 22</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Red%20Ale%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 10. Brown Ale -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1616172607421-4f69162db8f0?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Brown+Ale'" alt="Brown Ale" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Dormente</h4>
+                            <span class="text-amber font-mono font-bold text-sm">BROWN ALE</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Aromas de nozes e chocolate de leite. Uma cerveja suave, acolhedora e reconfortante.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 5.4%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 24</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Brown%20Ale%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 11. Porter -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1572851214088-7e3f8a00e008?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Porter'" alt="Porter" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Maquinista</h4>
+                            <span class="text-amber font-mono font-bold text-sm">PORTER</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Cerveja escura com notas evidentes de café moído e cacau. A escolha de quem comanda a máquina.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 6.0%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 35</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Porter%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 12. Imperial Stout -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1565930006079-2475ec65a4c5?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Imperial+Stout'" alt="Imperial Stout" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Comboio Noturno</h4>
+                            <span class="text-amber font-mono font-bold text-sm">IMP. STOUT</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Licorosa, alcoólica e complexa. Feita para ser degustada lentamente nas noites mais longas.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 10.5%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 60</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Imperial%20Stout%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 13. Catharina Sour -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1621213328246-834f37f37dd4?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Catharina+Sour'" alt="Sour" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Estação Capinzal</h4>
+                            <span class="text-amber font-mono font-bold text-sm">CATH. SOUR</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Acidez refrescante aliada à fruta local de SC. Uma paragem obrigatória, leve e cativante.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 4.5%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 5</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Sour%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 14. Witbier -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1582234057630-9b0d3bb6f1c4?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Witbier'" alt="Witbier" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Névoa na Linha</h4>
+                            <span class="text-amber font-mono font-bold text-sm">WITBIER</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Trigo belga com sementes de coentro e casca de laranja. Turva, mística e misteriosa.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 4.8%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 12</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Witbier%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 15. Bock -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1623863777553-96b6e7ab7243?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Bock'" alt="Bock" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Carga Pesada</h4>
+                            <span class="text-amber font-mono font-bold text-sm">BOCK</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Lager escura de perfil maltado intenso, trazendo um corpo denso. Combustível puro para a alma.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 6.8%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 25</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Bock%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 16. Doppelbock -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1626245136979-33ec8a7e0407?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Doppelbock'" alt="Doppelbock" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Caldeira</h4>
+                            <span class="text-amber font-mono font-bold text-sm">DOPPELBOCK</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Ainda mais forte e intensa que a Bock tradicional. É o verdadeiro motor de aquecimento em dias frios.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 8.0%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 20</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Doppelbock%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 17. Helles -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1571115177098-24edf4c4a4f8?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Helles'" alt="Helles" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Bilhete Dourado</h4>
+                            <span class="text-amber font-mono font-bold text-sm">MUNICH HELLES</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Dourada, muito suave e focada no malte claro. O clássico bilhete de entrada para o mundo artesanal.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 4.7%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 18</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Helles%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 18. Kölsch -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1616428782061-6899b820601f?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Kölsch'" alt="Kölsch" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Vapor</h4>
+                            <span class="text-amber font-mono font-bold text-sm">KÖLSCH</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Fermentação híbrida. Traz uma sensação tão limpa e refrescante como a brisa na janela do comboio.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 4.8%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 22</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Kolsch%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 19. Belgian Blond -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1563514981180-2d8805f4258d?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Belgian+Blond'" alt="Belgian Blond" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Sino da Estação</h4>
+                            <span class="text-amber font-mono font-bold text-sm">BELGIAN BLOND</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Elegante, ligeiramente frutada e com notas sutis de especiarias devido à levedura belga.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 6.5%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 24</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Belgian%20Blond%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 20. Tripel -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1647414909191-2364c67675f9?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Tripel'" alt="Tripel" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Viajante</h4>
+                            <span class="text-amber font-mono font-bold text-sm">TRIPEL</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Dourada, complexa e pujante. Os ésteres frutados preparam o terreno para uma verdadeira viagem.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 9.0%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 30</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Tripel%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 21. Saison -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1600329061803-34eeb8fb4032?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Saison'" alt="Saison" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Caminho de Ferro</h4>
+                            <span class="text-amber font-mono font-bold text-sm">SAISON</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Rústica, frutada e seca. Uma receita originária dos campos rurais, perfeita para dias quentes.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 6.2%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 28</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Saison%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 22. Barleywine -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1549642646-63d1bd6d8137?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Barleywine'" alt="Barleywine" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Fim da Linha</h4>
+                            <span class="text-amber font-mono font-bold text-sm">BARLEYWINE</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Licorosa, rica em caramelo e frutas passas. Uma autêntica experiência de degustação final.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 11.0%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 50</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Barleywine%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 23. NEIPA -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1627998634568-7c8702c2ef18?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=NEIPA'" alt="NEIPA" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Fumo Denso</h4>
+                            <span class="text-amber font-mono font-bold text-sm">NEIPA</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">Aparência turva e suculenta. Uma explosão de aromas e sabores que recordam frutas tropicais.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 6.8%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 40</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20NEIPA%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+                <!-- 24. Vienna Lager -->
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col">
+                    <div class="h-48 bg-dark-800 relative overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1616428782061-6899b820601f?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null;this.src='https://placehold.co/600x400/141414/b87333?text=Vienna+Lager'" alt="Vienna Lager" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="title-font text-xl font-bold text-white">Fornalha</h4>
+                            <span class="text-amber font-mono font-bold text-sm">VIENNA LAGER</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow">De cor âmbar escura e elegante, com notas nobres de pão levemente tostado e malte.</p>
+                        <div class="flex justify-between items-center text-xs text-gray-500 font-mono bg-dark-900 p-2 rounded border border-dark-700 mb-4">
+                            <span><i class="fa-solid fa-percent text-amber"></i> ABV: 5.2%</span>
+                            <span><i class="fa-solid fa-droplet text-amber"></i> IBU: 22</span>
+                        </div>
+                        <a href="https://wa.me/5549999999999?text=Quero%20a%20Vienna%20Lager%20em%20garrafa" class="w-full text-center border border-amber text-amber hover:bg-amber hover:text-black py-2 rounded font-bold transition-colors text-sm">Pedir Agora</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE A RAILBEER / FABRICAÇÃO -->
+    <section id="sobre" class="py-20 bg-dark-800 border-y border-dark-700 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111), repeating-linear-gradient(45deg, #111 25%, #0a0a0a 25%, #0a0a0a 75%, #111 75%, #111); background-size: 20px 20px;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2 relative">
+                    <div class="absolute -inset-4 border-2 border-amber/30 rounded-lg transform rotate-3"></div>
+                    <img src="https://images.unsplash.com/photo-1595166415033-64903dfc8230?auto=format&fit=crop&w=800&q=80" onerror="this.onerror=null;this.src='https://placehold.co/800x600/141414/b87333?text=Producao+Artesanal'" alt="Equipamentos da Cervejaria" class="relative rounded-lg shadow-2xl grayscale hover:grayscale-0 transition-all duration-700 w-full object-cover h-[400px]">
+                    <div class="absolute bottom-4 right-4 bg-black/80 backdrop-blur p-4 rounded border border-amber/50 flex items-center gap-4">
+                        <i class="fa-solid fa-temperature-half text-amber text-3xl"></i>
+                        <div>
+                            <div class="text-xs text-gray-400 uppercase tracking-widest">Tecnologia Própria</div>
+                            <div class="text-white font-bold text-sm">Controle de Precisão</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2">
+                    <h2 class="title-font text-3xl md:text-5xl font-bold mb-6">A Nossa História,<br>Produzida em <span class="text-amber">Capinzal.</span></h2>
+                    <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                        A Railbeer nasceu da vontade de criar cervejas com alma, feitas localmente em Capinzal, Santa Catarina. Unimos o rigor da engenharia com a arte milenar da fermentação.
+                    </p>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        Diferente das grandes indústrias, a nossa produção é feita em pequenos lotes. Cada brassagem é monitorada por um sistema exclusivo desenvolvido por nós (Capinzal OS), garantindo que cada **garrafa entregue** o perfil de sabor exato planejado.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="border-l-2 border-amber pl-4">
+                            <div class="text-2xl font-bold text-white mb-1">100%</div>
+                            <div class="text-sm text-gray-500 uppercase tracking-wider">Malte Puro</div>
+                        </div>
+                        <div class="border-l-2 border-amber pl-4">
+                            <div class="text-2xl font-bold text-white mb-1">Local</div>
+                            <div class="text-sm text-gray-500 uppercase tracking-wider">Feita em SC</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BANNER DELIVERY / COMO COMPRAR -->
+    <section id="delivery" class="py-24 bg-dark-900 text-center relative">
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <div class="w-20 h-20 bg-dark-800 border border-amber text-amber rounded-full flex items-center justify-center text-3xl mx-auto mb-6 shadow-[0_0_30px_rgba(184,115,51,0.3)]">
+                <i class="fa-solid fa-bottle-droplet"></i>
+            </div>
+            <h2 class="title-font text-4xl md:text-5xl font-bold mb-4">A Cervejaria vai até você.</h2>
+            <p class="text-xl text-gray-400 mb-10">Entregamos a autêntica cerveja artesanal em Capinzal e região. Trabalhamos exclusivamente com as nossas clássicas <strong class="text-amber">garrafas de 600ml</strong>, perfeitas para garantir a qualidade e o frescor até a sua casa.</p>
+            
+            <div class="bg-dark-800 border border-dark-700 rounded-2xl p-6 md:p-10 max-w-2xl mx-auto">
+                <h4 class="text-white font-bold text-xl mb-6">Como fazer o seu pedido:</h4>
+                <ol class="text-left space-y-4 text-gray-400 mb-8 w-fit mx-auto">
+                    <li class="flex items-center gap-3"><span class="w-8 h-8 rounded bg-dark-900 text-amber flex items-center justify-center font-bold">1</span> Clique no botão do WhatsApp abaixo.</li>
+                    <li class="flex items-center gap-3"><span class="w-8 h-8 rounded bg-dark-900 text-amber flex items-center justify-center font-bold">2</span> Consulte as garrafas disponíveis na semana.</li>
+                    <li class="flex items-center gap-3"><span class="w-8 h-8 rounded bg-dark-900 text-amber flex items-center justify-center font-bold">3</span> Receba no conforto da sua casa, bem gelada.</li>
+                </ol>
+                
+                <a href="https://wa.me/5549999999999?text=Olá,%20gostaria%20de%20ver%20as%20garrafas%20de%20600ml%20disponíveis%20da%20Railbeer!" target="_blank" class="btn-beer w-full md:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 rounded-lg text-lg font-bold shadow-lg shadow-amber/20">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i> PEDIR PELO WHATSAPP
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-dark-700 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                
+                <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-train-tram text-amber text-2xl"></i>
+                        <span class="font-bold text-2xl tracking-widest text-white uppercase">Rail<span class="text-amber">beer</span></span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-6">
+                        Cerveja artesanal de qualidade superior. A vida é curta demais para beber cerveja ruim.
+                    </p>
+                    <div class="flex items-center gap-3 text-gray-600 bg-dark-900 px-4 py-2 rounded-full border border-dark-800">
+                        <div class="age-gate">18+</div>
+                        <span class="text-xs font-bold uppercase tracking-wider">Aprecie com moderação.<br>Se beber, não dirija.</span>
+                    </div>
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h4 class="text-white font-bold mb-4 uppercase tracking-widest text-sm">Links Rápidos</h4>
+                    <ul class="space-y-3 text-sm text-gray-500">
+                        <li><a href="#estilos" class="hover:text-amber transition-colors">Carta de Cervejas</a></li>
+                        <li><a href="#sobre" class="hover:text-amber transition-colors">A Cervejaria</a></li>
+                        <li><a href="#delivery" class="hover:text-amber transition-colors">Entregas de Garrafas</a></li>
+                        <li><a href="#" class="hover:text-amber transition-colors">Nossa Loja</a></li>
+                    </ul>
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h4 class="text-white font-bold mb-4 uppercase tracking-widest text-sm">Siga Nossos Trilhos</h4>
+                    <div class="flex gap-4 justify-center md:justify-start mb-6">
+                        <a href="#" class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center text-gray-400 hover:bg-amber hover:text-black transition-all"><i class="fa-brands fa-instagram text-lg"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center text-gray-400 hover:bg-amber hover:text-black transition-all"><i class="fa-brands fa-facebook-f text-lg"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center text-gray-400 hover:bg-amber hover:text-black transition-all"><i class="fa-brands fa-untappd text-lg"></i></a>
+                    </div>
+                    <div class="text-sm text-gray-500 space-y-2">
+                        <p><i class="fa-solid fa-location-dot w-5 text-amber"></i> Capinzal - SC, Brasil</p>
+                        <p><i class="fa-solid fa-envelope w-5 text-amber"></i> contato@railbeer.com.br</p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="border-t border-dark-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-mono">
+                <p>&copy; 2026 Cervejaria Railbeer. Todos os direitos reservados.</p>
+                <p class="mt-2 md:mt-0">Feito com <i class="fa-solid fa-heart text-amber"></i> e Capinzal OS.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const navbar = document.getElementById('navbar');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-dark-900/95', 'backdrop-blur-md', 'shadow-lg');
+                navbar.classList.remove('bg-transparent', 'py-4');
+                navbar.classList.add('py-2');
+            } else {
+                navbar.classList.remove('bg-dark-900/95', 'backdrop-blur-md', 'shadow-lg', 'py-2');
+                navbar.classList.add('bg-transparent', 'py-4');
+            }
+        });
+    </script>
+</body>
+</html>
