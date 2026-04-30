@@ -107,6 +107,7 @@
                     <a href="https://wa.me/5549999027524" target="_blank" class="btn-beer px-5 py-2 rounded shadow-lg flex items-center gap-2">
                         <i class="fa-brands fa-whatsapp text-lg"></i> WHATSAPP
                     </a>
+                    <a id="lnk-producao-desktop" href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 border border-dark-700 hover:border-gray-500 bg-dark-800 px-3 py-2 rounded text-xs font-bold tracking-widest uppercase shadow-md"><i class="fa-solid fa-industry text-amber"></i> Produção</a>
                 </div>
 
                 <div class="md:hidden flex items-center">
@@ -122,6 +123,7 @@
                 <a href="#estilos" class="text-gray-300 hover:text-amber block py-3 text-lg border-b border-dark-800">Cervejas</a>
                 <a href="#sobre" class="text-gray-300 hover:text-amber block py-3 text-lg border-b border-dark-800">Nossa História</a>
                 <a href="#delivery" class="text-gray-300 hover:text-amber block py-3 text-lg border-b border-dark-800">Como Comprar</a>
+                <a id="lnk-producao-mobile" href="#" class="text-gray-300 hover:text-amber block py-3 text-lg border-b border-dark-800"><i class="fa-solid fa-industry text-amber"></i> Área de Produção</a>
                 <a href="https://wa.me/5549999027524" target="_blank" class="btn-beer block py-3 rounded text-lg mt-2">
                     <i class="fa-brands fa-whatsapp"></i> Chamar no Zap
                 </a>
@@ -778,6 +780,28 @@
                 navbar.classList.add('bg-transparent', 'py-4');
             }
         });
+    </script>
+
+    <script>
+        const DB_URL_CONFIG = "https://railbeer-bf412-default-rtdb.firebaseio.com/config/link_producao.json";
+
+        async function sincronizarLinkProducao() {
+            try {
+                const response = await fetch(DB_URL_CONFIG);
+                const linkAtivo = await response.json();
+                
+                if (linkAtivo && typeof linkAtivo === 'string') {
+                    const lnkDesktop = document.getElementById('lnk-producao-desktop');
+                    const lnkMobile = document.getElementById('lnk-producao-mobile');
+                    if (lnkDesktop) lnkDesktop.href = linkAtivo;
+                    if (lnkMobile) lnkMobile.href = linkAtivo;
+                }
+            } catch (e) {
+                console.log("Usando link padrão.");
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', sincronizarLinkProducao);
     </script>
 </body>
 </html>
